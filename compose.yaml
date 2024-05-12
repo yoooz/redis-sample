@@ -1,4 +1,12 @@
 services:
+  db:
+    image: mysql:8.4.0
+    volumes:
+      - ./db/initdb.d/:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
   redis:
     image: redis
     ports:
@@ -11,4 +19,5 @@ services:
       - "1323:1323"
     depends_on:
       - redis
+      - db
 
